@@ -167,7 +167,7 @@ body {
 
 .list-of-pets {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
     column-gap: 34px;
     row-gap: 28px;
 }
@@ -178,8 +178,14 @@ body {
     border-radius: 20px;
     border: 2px solid #f3f3f3f3;
     background: #fff;
-    box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.08);
+    box-shadow: 2px 2px 5px 0px #00000014;
     overflow: hidden;
+    transition: all 300ms ease;
+}
+
+.pet-card:hover {
+    box-shadow: 2px 2px 5px 0px #170a6d7d;
+
 }
 
 .pet-card-photo {
@@ -249,6 +255,14 @@ body {
 
     .list-of-pets {
         row-gap: 1rem;
+    }
+
+    .pet-card {
+        grid-template-columns: 110px 1fr;
+        margin: 0 auto;
+        width: calc(100% - 32px);
+        max-width: 360px;
+        padding: 0;
     }
 
     .pet-card-text {
