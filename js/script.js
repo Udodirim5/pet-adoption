@@ -26,7 +26,7 @@ async function petsArea() {
         clone.querySelector(".pet-age").textContent = createAgeText(pet.birthYear);
         clone.querySelector(".pet-description").textContent = pet.description
 
-        if(!pet.photo) pet.photo = "/img/fallback.jpg";
+        if (!pet.photo) pet.photo = "/img/fallback.jpg";
 
         clone.querySelector(".pet-card-photo img").src = pet.photo
         clone.querySelector(".pet-card-photo img").alt = `A ${pet.species} named ${pet.name}`
@@ -50,3 +50,15 @@ function createAgeText(birthYear) {
         return `Less than a year old!`
     }
 }
+
+// pet filter btn code
+const allbtn = document.querySelectorAll('.pet-filter button');
+allbtn.forEach((button) => {
+    button.addEventListener('click', (e) => {
+        // Remove active class from any and all btn
+        allbtn.forEach((button) => button.classList.remove("active") )
+        //Add the active class to the specific btn that just got click
+        e.target.classList.add("active");
+        // Actually filter the pets down below
+    })
+});
