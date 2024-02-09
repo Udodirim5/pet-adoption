@@ -22,43 +22,54 @@ async function petsArea() {
     petData.forEach((pet) => {
         const clone = template.content.cloneNode(true);
 
-        clone.querySelector("h3").textContent = pet.name
+        clone.querySelector(".pet-card").dataset.species = pet.species;
+
+        clone.querySelector("h3").textContent = pet.name;
         clone.querySelector(".pet-age").textContent = createAgeText(pet.birthYear);
-        clone.querySelector(".pet-description").textContent = pet.description
+        clone.querySelector(".pet-description").textContent = pet.description;
 
         if (!pet.photo) pet.photo = "/img/fallback.jpg";
 
-        clone.querySelector(".pet-card-photo img").src = pet.photo
-        clone.querySelector(".pet-card-photo img").alt = `A ${pet.species} named ${pet.name}`
+        clone.querySelector(".pet-card-photo img").src = pet.photo;
+        clone.querySelector(
+            ".pet-card-photo img"
+        ).alt = `A ${pet.species} named ${pet.name}`;
 
-
-        wrapper.appendChild(clone)
+        wrapper.appendChild(clone);
     });
 
     document.querySelector(".list-of-pets").appendChild(wrapper);
 }
 petsArea();
 function createAgeText(birthYear) {
-    const currentYear = new Date().getFullYear()
-    const age = currentYear - birthYear
+    const currentYear = new Date().getFullYear();
+    const age = currentYear - birthYear;
     if (age == 1) {
-        return `${age} year`
-    }
-    else if (age > 1) {
-        return `${age} years`
+        return `${age} year`;
+    } else if (age > 1) {
+        return `${age} years`;
     } else {
-        return `Less than a year old!`
+        return `Less than a year old!`;
     }
 }
 
-// pet filter btn code
-const allbtn = document.querySelectorAll('.pet-filter button');
+const allbtn = document.querySelectorAll(".pet-filter button");
 allbtn.forEach((button) => {
-    button.addEventListener('click', (e) => {
+    button.addEventListener("click", (e) => {
         // Remove active class from any and all btn
-        allbtn.forEach((button) => button.classList.remove("active") )
-        //Add the active class to the specific btn that just got click
+        allbtn.forEach((btn) => btn.classList.remove("active"));
+
+        // Add the active class to the specific btn that just got clicked
         e.target.classList.add("active");
+
         // Actually filter the pets down below
-    })
+        const currentFilter = e.target.dataset.filter;
+        document.querySelectorAll(".pet-card").forEach((card) => {
+            if (currentFilter == card.dataset.species || currentFilter == "all") {
+                card.style.display = "grid";
+            } else {
+                card.style.display = "none";
+            }
+        });
+    });
 });
